@@ -1,0 +1,4 @@
+certifi==2020.12.5
+numpy==1.19.4
+pygame==2.0.0
+wincertstore==0.2
