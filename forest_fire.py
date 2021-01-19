@@ -15,7 +15,7 @@ __screenSize__ = (800,500)
 __forestSize__ = (500,500)
 __cellSize__ = 10 
 __gridDim__ = tuple(map(lambda x: int(x/__cellSize__), __forestSize__)) # shape : (50, 50)
-__density__ = 0.55     
+# __density__ = 0.55     
 
 # cell colors : void, resistant tree, normal tree, fire, water, inflammable tree                
 __colors__ = [(255,255,255),(0,100,40),(0,160,40),(160,40,0),(30,30,255),(100,60,30)]  
@@ -34,15 +34,16 @@ class Grid:
     _gridbis = None
     _dictNeighbourIndex = {"north" : (0,-1), "south" : (0,1), "east" : (1,0), "west" : (-1,0)}
    
-    def __init__(self, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
+    def __init__(self, density, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
         print("Creating a grid of dimensions " + str(__gridDim__))
         # initializing the grid
+        self._density = density
         self._grid = np.zeros(__gridDim__, dtype='int8')    # first we create a grid of zeros
         self._gridbis = np.zeros(__gridDim__, dtype='int8') # we initialize gridbis in the same way, it will be usefull for updating the scene
         nx, ny = __gridDim__
         
         # initializing normal trees according to forest density
-        ones = np.random.random((nx, ny)) <= __density__  
+        ones = np.random.random((nx, ny)) <= self._density 
         self._grid[0:nx, 0:ny] = ones*2
         
         # initializing other sceneries
@@ -203,12 +204,15 @@ class Scene:
     _grid = None
     _font = None
 
-    def __init__(self, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
+    def __init__(self, density, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
         # initializing pygame
         pygame.init()
         pygame.font.init()
         self._screen = pygame.display.set_mode(__screenSize__)
         self._font = pygame.font.SysFont('Arial',20, bold=True)
+        self._firstPass = True
+        self._end = False
+        self._density = density
         
         # Wind
         self._north_wind = north_wind
@@ -227,7 +231,7 @@ class Scene:
         self._all_winds_image = pygame.image.load("Images/all.png").convert_alpha()
         
         # initializing grid
-        self._grid = Grid(north_wind=self._north_wind, south_wind=self._south_wind, east_wind=self._east_wind, west_wind=self._west_wind)
+        self._grid = Grid(density=self._density, north_wind=self._north_wind, south_wind=self._south_wind, east_wind=self._east_wind, west_wind=self._west_wind)
         
 
     def drawMe(self):
@@ -309,8 +313,8 @@ class Scene:
                 if __normalTreeProba__*nbFire>=0.45:
                     self._grid._gridbis[c[0],c[1]]=3
             elif self._grid._grid[c[0],c[1]]==1:
-                # resistant trees can only totally get on fire if proba*nbFire >=0.60
-                # if 0.45 <= proba*nbFire <0.60, resistant tree only become more vulnerable but don't get totally burned
+                # resistant trees can only totally get on fire if proba*nbFire >=0.70
+                # if 0.45 <= proba*nbFire <0.70, resistant tree only become more vulnerable but don't get totally burned
                 if __resistantTreeProba__*nbFire>=0.45:
                     self._grid._gridbis[c[0],c[1]]==2
                 if __resistantTreeProba__*nbFire>=0.70:
@@ -330,6 +334,9 @@ class Scene:
         
         # update percentage of trees left
         self._grid._percentageTreeLeft=self._grid.percentageTreeLeft()
+        
+        # check if simulation is finished
+        self.endSimulation()
 
 
     def startFire(self):
@@ -344,14 +351,30 @@ class Scene:
             self._grid._gridbis[x,y]=2
         self._grid._grid = np.copy(self._grid._gridbis)
         self.update()
-            
         
+        
+    def startFireCenter(self):
+        # starting fire on center no matter how the map has been initialized (only for percolation study)
+        nx, ny = __gridDim__
+        if self._firstPass:
+            self._grid._grid[nx//2, ny//2]=3
+            self.update()
+            self._firstPass = False
+            
+    def endSimulation(self):
+        countFire = False
+        for c in self._grid.allCells():
+            if self._grid._grid[c[0], c[1]]==3:
+                countFire = True
+        
+        if countFire == False:
+            self._end = True
         
 
 def main():
     # initializing scene
-    scene = Scene(north_wind=True, east_wind=True)
-    done = False
+    scene = Scene(density=__density__)
+    done = False # add function end in scene : if no more fire, done == True
     clock = pygame.time.Clock()
     while done == False:
         scene.drawMe()
@@ -367,5 +390,30 @@ def main():
                 done=True
 
     pygame.quit()
+    
+def percolation():
+    # we study the percolation without any wind and fire starting at center of forest
+    densities = [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
+    avg_percentageTreeLeft = []
+    for d in densities:
+        # we run the code 10 times per density
+        percentageTreeLeft = []
+        for i in range(0, 40):
+        # initializing scene
+            scene = Scene(density=d) 
+            clock = pygame.time.Clock()
+            while scene._end == False:
+                scene.startFireCenter()
+                scene.drawMe()
+                pygame.display.flip()
+                scene.update()
+                clock.tick(2)
+            percentageTreeLeft.append(scene._grid._percentageTreeLeft)
+        avg_percentageTreeLeft.append(sum(percentageTreeLeft)/40)
+    pygame.quit()
+    print("\nPercolation study")
+    for i in range(0, len(densities)):
+        print(f"\nDensity : {densities[i]}     Percentage tree left : {avg_percentageTreeLeft[i]}")
+    
 
-if not sys.flags.interactive: main()
+if not sys.flags.interactive: percolation()
