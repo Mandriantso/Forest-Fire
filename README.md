@@ -12,22 +12,24 @@ La forêt compte aussi des points d'eau qui représentent 15% de l'espace vide, 
 
 ### Les différents types d'arbre
 #### Les arbres normaux
-Ils sont représentés par des [insérer carré vert] et consituent 70% des arbres de la forêt. Ces arbres ont une probabilité normale de s'enflammer, c'est-à-dire qu'ils s'enflamment lorsqu'au moins un de leurs voisins est en feu. On ne comptera pas les voisins en diagonale. Les arbres normaux ne brûlent pas si le vent souffle dans la direction opposée.
+Ils sont représentés par des ![arbres normaux](Images/normalTree.PNG) et consituent 70% des arbres de la forêt. Ces arbres ont une probabilité normale de s'enflammer, c'est-à-dire qu'ils s'enflamment lorsqu'au moins un de leurs voisins est en feu. On ne comptera pas les voisins en diagonale. Les arbres normaux ne brûlent pas si le vent souffle dans la direction opposée.
 
 #### Les arbres résistants
-Ils sont représentés par des [insérer carré vert foncé] et constituent 20% des arbres de la forêt. Ces arbres ont une probabilité faible de s'enflammer. Ils doivent s'enflammer deux fois pour être détruits. La première fois, ils ne prennent feu que lorqu'au moins 3 de leurs voisins sont en feu. Ils changent alors d'état et deviennent des arbres normaux.
+Ils sont représentés par des ![arbres résistants](Images/resistantTree.PNG) et constituent 20% des arbres de la forêt. Ces arbres ont une probabilité faible de s'enflammer. Ils doivent s'enflammer deux fois pour être détruits. La première fois, ils ne prennent feu que lorqu'au moins 3 de leurs voisins sont en feu. Ils changent alors d'état et deviennent des arbres normaux.
 [insérer simu arbre résistant]
 
 #### Les arbres inflammables
-Ils sont représentés par des [insérer carré bordeaux] et constituent 10% des arbres de la forêt. Ces arbres ont une probabilité très élevée de s'enflammer. Ils prennent feu dès lors qu'un de leurs voisins est en feu, même si le vent souffle dans la direction opposée.
+Ils sont représentés par des ![arbres inflammables](Images/inflammableTree.PNG) et constituent 10% des arbres de la forêt. Ces arbres ont une probabilité très élevée de s'enflammer. Ils prennent feu dès lors qu'un de leurs voisins est en feu, même si le vent souffle dans la direction opposée.
 
 ### Les vents
 L'action des différents vents est prise en compte dans la simulation. Quand un vent est actif, le feu se propage une case plus loin dans la direction du vent, et ne se propage plus dans la direction opposée. Par défaut, il n'y a pas de vent. Il faut paramétrer le vent souhaité à **True** dans l'initialisation de la scène pour que le vent souhaité puisse agir sur l'évolution du feu.
 ```python
 scene = Scene(north_wind=True)
 ```
-Pour des raisons de simplification, les différents vents s'additionnent. C'est-à-dire que si le vent nord et le vent est sont activés en même temps, on obtient un vend qui va dans la direction nord-est. Cependant, les vents opposés ne peuvent pas être actifs en même temps, c'est-à-dire que le vent du nord ne peut pas être actif en même temps que le vent du sud.
-[insérer image boussole vent nord] [insérer image boussole vent est] [insérer image boussole vent nord-est]
+Pour des raisons de simplification, les différents vents s'additionnent. C'est-à-dire que si le vent nord et le vent est sont activés en même temps, on obtient un vend qui va dans la direction nord-est. Cependant, les vents opposés ne peuvent pas être actifs en même temps, c'est-à-dire que le vent du nord ne peut pas être actif en même temps que le vent du sud.  
+
+![vent nord](Images/northWind.PNG)      ![vent est](Images/eastWind.PNG)         ![vent nord est](Images/northEastWind.PNG)  
+
 [insérer simu vent nord est]
 
 ### Étude de la percolation
