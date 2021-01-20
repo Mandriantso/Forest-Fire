@@ -15,7 +15,7 @@ __screenSize__ = (800,500)
 __forestSize__ = (500,500)
 __cellSize__ = 10 
 __gridDim__ = tuple(map(lambda x: int(x/__cellSize__), __forestSize__)) # shape : (50, 50)
-# __density__ = 0.55     
+__density__ = 0.55     
 
 # cell colors : void, resistant tree, normal tree, fire, water, inflammable tree                
 __colors__ = [(255,255,255),(0,100,40),(0,160,40),(160,40,0),(30,30,255),(100,60,30)]  
@@ -373,7 +373,7 @@ class Scene:
 
 def main():
     # initializing scene
-    scene = Scene(density=__density__)
+    scene = Scene(density=__density__, north_wind=True, east_wind=True)
     done = False # add function end in scene : if no more fire, done == True
     clock = pygame.time.Clock()
     while done == False:
@@ -416,4 +416,4 @@ def percolation():
         print(f"\nDensity : {densities[i]}     Percentage tree left : {avg_percentageTreeLeft[i]}")
     
 
-if not sys.flags.interactive: percolation()
+if not sys.flags.interactive: main()
