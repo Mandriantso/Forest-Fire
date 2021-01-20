@@ -1,6 +1,5 @@
 # Simulation de feu de forêt
 Ce projet consistait à simuler des feux de forêt en utilisant des automates cellulaires. Il s'agissait aussi de faire une étude de percolation autour de la densité de la forêt afin de définir un seuil au-delà duquel plus de la moitié de la forêt prendrait feu.
-[insérer simu version cliquable]
 
 ### Composition de la forêt
 La forêt est constituée de 3 types d'arbres différents :
