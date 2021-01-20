@@ -44,7 +44,7 @@ Pour chaque densité, je lance la simulation 40 fois puis je calcule la moyenne 
 </div> 
 
 <p align="center">
-  <img width="460" height="300" src="Images/percolation_results.PNG">
+  <img src="Images/percolation_results.PNG"></br>
   Résultats percolation
 </p>
 
