@@ -41,7 +41,12 @@ Pour des raisons de simplification, les différents vents s'additionnent. C'est-
   <em>Vent Nord-Est</em>
 </p>     
 
-[insérer simu vent nord est]
+Pour mieux visualiser l'effet des vents, voici une simulation d'un vent nord-est:
+<p align="center">
+  <img src="Images/northEastWind.gif"></br>
+  <em>simulation Nord-Est</em>
+</p>
+
 
 ### Étude de la percolation
 Pour étudier la percolation, le feu se propage depuis la cellule du centre. J'ai fait une boucle sur plusieurs densités :
