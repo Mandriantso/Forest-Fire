@@ -28,7 +28,18 @@ scene = Scene(north_wind=True)
 ```
 Pour des raisons de simplification, les différents vents s'additionnent. C'est-à-dire que si le vent nord et le vent est sont activés en même temps, on obtient un vend qui va dans la direction nord-est. Cependant, les vents opposés ne peuvent pas être actifs en même temps, c'est-à-dire que le vent du nord ne peut pas être actif en même temps que le vent du sud.  
 
-![vent nord](Images/northWind.PNG)      ![vent est](Images/eastWind.PNG)         ![vent nord est](Images/northEastWind.PNG)  
+<p align="center">
+  <img src="Images/northWind.PNG"></br>
+  <em>Vent Nord</em>
+</p>  
+<p align="center">
+  <img src="Images/eastWind.PNG"></br>
+  <em>Vent Est</em>
+</p>  
+<p align="center">
+  <img src="Images/northEastWind.PNG"></br>
+  <em>Vent Nord-Est</em>
+</p>     
 
 [insérer simu vent nord est]
 
@@ -39,13 +50,9 @@ densities = [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
 ```
 Pour chaque densité, je lance la simulation 40 fois puis je calcule la moyenne du pourcentage d'arbres restants. Voici les résultats obtenus :  
 
-<div class="center">
-    <img src="Images/percolation_results.PNG" />
-</div> 
-
 <p align="center">
   <img src="Images/percolation_results.PNG"></br>
-  Résultats percolation
+  <em>Résultats percolation</em>
 </p>
 
 Nous pouvons constater un saut entre les résultats pour une densité de 0.7 et une densité de 0.75. Nous pouvons dire que le seuil de percolation se trouve à 0.7 car au-delà de cette valeur, une importante partie de la forêt disparaît.
