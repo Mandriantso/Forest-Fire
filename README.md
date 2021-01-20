@@ -41,8 +41,11 @@ Pour des raisons de simplification, les différents vents s'additionnent. C'est-
   <em>Vent Nord-Est</em>
 </p>     
 
-Pour mieux visualiser l'effet des vents, voici une simulation d'un vent nord-est:
-![vent nord est](Images/northEastWind.gif)
+Pour mieux visualiser l'effet des vents, voici une simulation d'un vent nord-est:  
+<p align="center">
+  <img src="Images/northEastWind.gif"></br>
+  <em>simulation Nord-Est</em>
+</p>
 
 
 ### Étude de la percolation
