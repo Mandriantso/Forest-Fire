@@ -42,10 +42,7 @@ Pour des raisons de simplification, les différents vents s'additionnent. C'est-
 </p>     
 
 Pour mieux visualiser l'effet des vents, voici une simulation d'un vent nord-est:
-<p align="center">
-  <img src="Images/northEastWind.gif"></br>
-  <em>simulation Nord-Est</em>
-</p>
+![vent nord est](Images/northEastWind.gif)
 
 
 ### Étude de la percolation
