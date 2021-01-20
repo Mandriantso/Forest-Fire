@@ -39,7 +39,10 @@ densities = [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
 ```
 Pour chaque densité, je lance la simulation 40 fois puis je calcule la moyenne du pourcentage d'arbres restants. Voici les résultats obtenus :  
 
-<div class="center"><img src="Images/percolation_results.PNG" />Résultats de la percolation</div>  
+<div class="center">
+    <img src="Images/percolation_results.PNG" />
+    Résultats de la percolation
+</div>  
 
 Nous pouvons constater un saut entre les résultats pour une densité de 0.7 et une densité de 0.75. Nous pouvons dire que le seuil de percolation se trouve à 0.7 car au-delà de cette valeur, une importante partie de la forêt disparaît.
 
