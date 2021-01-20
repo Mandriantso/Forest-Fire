@@ -34,7 +34,7 @@ class Grid:
     _gridbis = None
     _dictNeighbourIndex = {"north" : (0,-1), "south" : (0,1), "east" : (1,0), "west" : (-1,0)}
    
-    def __init__(self, density, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
+    def __init__(self, density=__density__, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
         print("Creating a grid of dimensions " + str(__gridDim__))
         # initializing the grid
         self._density = density
@@ -204,7 +204,7 @@ class Scene:
     _grid = None
     _font = None
 
-    def __init__(self, density, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
+    def __init__(self, density=__density__, north_wind=False, south_wind=False, east_wind=False, west_wind=False):
         # initializing pygame
         pygame.init()
         pygame.font.init()
@@ -373,7 +373,7 @@ class Scene:
 
 def main():
     # initializing scene
-    scene = Scene(density=__density__, north_wind=True, east_wind=True)
+    scene = Scene(north_wind=True, east_wind=True)
     done = False # add function end in scene : if no more fire, done == True
     clock = pygame.time.Clock()
     while done == False:
@@ -416,4 +416,4 @@ def percolation():
         print(f"\nDensity : {densities[i]}     Percentage tree left : {avg_percentageTreeLeft[i]}")
     
 
-if not sys.flags.interactive: main()
+if not sys.flags.interactive: main() # pour étudier la percolation, remplacez main() par percolation()
