@@ -41,7 +41,6 @@ Pour chaque densité, je lance la simulation 40 fois puis je calcule la moyenne 
 
 <div class="center">
     <img src="Images/percolation_results.PNG" />
-    Résultats de la percolation
 </div>  
 
 Nous pouvons constater un saut entre les résultats pour une densité de 0.7 et une densité de 0.75. Nous pouvons dire que le seuil de percolation se trouve à 0.7 car au-delà de cette valeur, une importante partie de la forêt disparaît.
